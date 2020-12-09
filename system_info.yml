@@ -1,0 +1,5 @@
+- hosts: 192.168.1.108
+  tasks:
+  - debug:
+     msg: "{{ ansible_facts['system']}}"
+    # msg: "{{ ansible_facts }}"
