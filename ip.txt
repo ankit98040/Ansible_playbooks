@@ -1,0 +1,5 @@
+[mylb]
+IP  ansible_user=root ansible_connection=ssh
+
+[myweb]
+IP ansible_user=root ansible_ssh_pass=redhat@123 ansible_connection=ssh
