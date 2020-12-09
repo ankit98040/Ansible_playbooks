@@ -1,0 +1,70 @@
+- hosts: all
+
+  vars_files:
+  - http_var.yml
+
+  #vars_prompt:
+  #- name: dvd_dir
+   # private: no
+
+ # vars:
+ # - dvd_dir: "/dvd1"
+ # - docroot: "/var/www/lw"
+ # - http_port: 8080
+
+  tasks:
+  - file: 
+     state: directory
+     path: "{{ dvd_dir }}"
+
+  - name: "mounting dvd"
+    mount:
+     src: "/dev/cdrom"
+     path: "{{ dvd_dir }}"
+     state: mounted
+     fstype: "iso9660"
+
+  - name: "Setting yum repo"
+    yum_repository:
+     baseurl: "{{ dvd_dir}}/AppStream"
+     name: "mydvd1"
+     description: "yum1"
+     gpgcheck: no
+
+  - name: "setting 2nd yum repo"
+    yum_repository:
+     baseurl: "{{ dvd_dir }}/BaseOS"
+     name: "mydvd2"
+     description: "yum2"
+     gpgcheck: no
+
+  - name: "installing httpd"
+    package:
+     name: "httpd"
+     state: present
+
+  - name: "creating lw directory inside /var/www/"
+    file: 
+     state: directory
+     path: "{{ docroot }}"
+
+  - template:
+     dest: "/etc/httpd/conf.d/lw.conf"
+     src: "lw.conf"
+
+  - copy: 
+     dest: "{{ docroot }}/index.html"
+     content: "this website has been configures using Ansible"
+
+  - name: "restarting the httpd service"
+    service:
+     name: "httpd"
+     state: restarted
+     enabled: yes
+
+  - name: "Setting up Firewall on port: {{ http_port }}"
+    firewalld:
+     port: "{{ http_port }}/tcp"
+     state: enabled
+     permanent: yes
+     immediate: yes
