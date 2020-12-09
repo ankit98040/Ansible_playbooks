@@ -1,0 +1,12 @@
+- hosts: all
+  tasks:
+    - name: Adding multiple repos
+      yum_repository:
+        name: dockername
+        description: desc for docker
+        baseurl: https://download.docker.com/linux/centos/7/x86_64/stable/
+        gpgcheck: no
+        
+    - name: "installing Docker"
+      command: "yum install docker-ce --nobest -y"
+        
