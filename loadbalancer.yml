@@ -1,0 +1,27 @@
+- hosts: myweb
+  tasks:
+    - name: "Install httpd"
+      package: 
+        name: "httpd"
+
+    - copy:
+        dest: "/var/www/html/index.html"
+        content: "Testing for LoadBalancer"
+
+    - service:
+        name: "httpd"
+        state: restarted
+
+- hosts: mylb
+  tasks:
+    - name: "Installing LoadBalancer Software"
+      package:
+        name: "haproxy"
+
+    - template:
+        dest: "/etc/haproxy/haproxy.cfg"
+        src: "haproxy.cfg"
+
+    - service:
+        name: "haproxy"
+        state: restarted
