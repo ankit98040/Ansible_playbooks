@@ -51,6 +51,8 @@
   - template:
      dest: "/etc/httpd/conf.d/lw.conf"
      src: "lw.conf"
+    notify: 
+     - Restart httpd
 
   - copy: 
      dest: "{{ docroot }}/index.html"
@@ -68,3 +70,10 @@
      state: enabled
      permanent: yes
      immediate: yes
+
+  - handlers: 
+    - name: Restart httpd
+      service: 
+        name: "httpd"
+        state: started
+        enabled: yes
