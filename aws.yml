@@ -1,0 +1,13 @@
+- hosts: localhost
+  tasks: 
+   - ec2_instance: 
+      region: ap-south-1
+      image_id: ami-08f63db601b82ff5f
+      instance_type: t2.micro
+      vpc_subnet_id: subnet-b2167dfe
+      security_group: sg-0003a545627d97eaa
+      key_name: lastkey
+      name: os_from_ansible
+      state: present
+      aws_access_key: 
+      aws_secret_key: 

@@ -1,0 +1,20 @@
+- hosts: ip
+  tasks:
+    - command: date
+      register: x
+
+    - service:
+        name: "httpd"
+        state: started
+      register: y
+
+    - debug:
+        msg: "Hi testing failed"
+      when: x.rc != 0
+
+    - debug:
+        var: y
+
+    - debug: 
+        msg: "Finally Testing done"
+      when: x.rc == 0 && y.failed == false
