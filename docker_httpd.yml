@@ -1,0 +1,48 @@
+- hosts:
+  tasks:
+    - name: "configuring docker repo"
+      copy:
+        src: "/etc/yum.repos.d/docker.repo"
+        dest: "/etc/yum.repos.d/docker.repo"
+
+    - name: "Installing docker "
+      command: "yum install docker-ce.x86_64 --nobest -y"
+
+    - name: "installing python"
+      package:
+        name: "python3"
+        state: present
+      register: python
+
+    - debug:
+      var: python.stdout
+
+    - name: "installing docker.py"
+      command: "pip3 install docker.py"
+      register: docker
+
+    - debug:
+        var: docker.stdout
+
+    - name: "starting docker services"
+      service:
+        name: "docker"
+        state: started
+        enabled: yes
+
+    - name: "Pulling image from dockerhub"
+      docker_image:
+        name: "httpd"
+        source: pull
+
+    - name: "Making a directory on managed node"
+      file:
+        path: "/root/webserver"
+        state: directory
+
+    - name: "Inserting webpage  in docker container"
+      copy: 
+        dest: "/root/webserver/index.html"
+        content: "Welcome to Docker"
+
+    
