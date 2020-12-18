@@ -45,4 +45,14 @@
         dest: "/root/webserver/index.html"
         content: "Welcome to Docker"
 
-    
+    - name: "Creating an OS image"
+      docker_container: 
+        name: "myos1"
+        image: "httpd"
+        volumes:
+          - "root/webserver:/usr/local/apache2/htdocs"
+        ports:
+          - "80"
+        exposed_ports: 
+          - "8081:80"
+        state: started
