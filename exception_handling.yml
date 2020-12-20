@@ -1,0 +1,27 @@
+- hosts:
+  tasks: 
+    - block:
+      - package:
+          name: "httpd"
+          state: present
+
+      - service:
+          name: "httpd"
+          state: started
+      - get_url:
+          url: ""
+          dest: "/var/www/html"
+
+      - debug:
+          msg: "testing"
+
+      rescue:
+      - copy: 
+          dest: "/var/www/html/a1.jpg"
+          content: "hi hello"
+      - debug:
+          msg: "Rescue called"
+
+      always:
+        - debug:
+          msg: "Will always run"
