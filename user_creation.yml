@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   - userdb:
+      - name: "ankit"
+        p: "redhat@123"
+        g: "g"
+      - name: "anu"
+        p: "hello"
+        g: "g"
+      - name: "ram"
+        p: "hello"
+        g: "e"
+  tasks: 
+   - user:
+      name: "{{ item.name }}"
+      password: "{{ item.p | password_hash('sha512') }}"
+      state: present
+      groups: "{{ item.g }}"
+  loop: "{{ userdb }}"
+   
