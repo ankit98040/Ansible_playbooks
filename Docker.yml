@@ -10,4 +10,5 @@
         
     - name: "installing Docker"
       command: "yum install docker-ce --nobest -y"
+    - command: "pip3 install docker.py"
         
