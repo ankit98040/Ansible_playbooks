@@ -1,20 +1,25 @@
 - hosts: ip
   tasks:
-    - command: date
+    - name: "date command running"
+      command: date
       register: x
 
-    - service:
+    - name: "httpd started or not"
+      service:
         name: "httpd"
         state: started
       register: y
 
-    - debug:
+    - name: "debugging if x fails"
+      debug:
         msg: "Hi testing failed"
       when: x.rc != 0
 
-    - debug:
+    - name: "debugging for y"
+      debug:
         var: y
 
-    - debug: 
+    - name: "debugging if command and module installs successfully"
+      debug: 
         msg: "Finally Testing done"
       when: x.rc == 0 && y.failed == false
