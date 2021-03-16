@@ -1,0 +1,44 @@
+- hosts: 
+  gather_facts: false
+  tasks:
+  - name: Creating yum repo
+    yum_repository:
+      name: docker
+      description: Docker Repository
+      file: /etc/yum.repos.d/docker
+      baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+      gpgcheck: no
+      enabled: true
+
+  - name: Installing Docker 
+    command: "yum install docker-ce --nobest -y"
+
+  - name: Installing python
+    package:
+      name: python36
+      state: present
+
+  - name: Installing Docker Python library
+    pip:
+      name: docker-py
+
+  - name: Creating workspace
+      path: /root/dockertask
+      state: directory
+
+  - name: Copying files to workspace
+    copy:
+      src: "index.html"
+      dest: "/root/dockertask/"
+    ignore_errors: yes
+
+
+  - name: Starting Docker service
+    package:
+      name: docker
+      state: started
+
+  - name: Pulling image
+    docker_image:
+      name: httpd
+      source: pull
