@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+    - name: "Sending Email using ansible"
+      mail:
+        host: smtp.gmail.com
+        port: 587
+        username: ######  
+        password: ****
+        to: pramanik.ankit@rediffmail.com 
+        subject: Hello from ansible
+        body: Hey buddy this mail is sent to you using ansible

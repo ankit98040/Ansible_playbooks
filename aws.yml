@@ -2,7 +2,7 @@
   tasks: 
    - ec2_instance: 
       region: ap-south-1
-      image_id: ami-08f63db601b82ff5f
+      image_id: ami-0a9d27a9f4f5c0efc
       instance_type: t2.micro
       vpc_subnet_id: subnet-b2167dfe
       security_group: sg-0003a545627d97eaa

@@ -1,0 +1,13 @@
+- hosts: localhost
+  tasks: 
+   - ec2_instance: 
+      region: us-east-1
+      image_id: ami-096fda3c22c1c990a
+      instance_type: t2.micro
+      vpc_subnet_id: subnet-0ef7e21d82e857efd
+      security_group: sg-0882b9321283b2232 (to be changed)
+      key_name: virginia
+      name: os_from_ansible
+      state: present
+      aws_access_key: A
+      aws_secret_key: s
