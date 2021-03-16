@@ -1,4 +1,4 @@
-- hosts: 
+- hosts: docker
   gather_facts: false
   tasks:
   - name: Creating yum repo
@@ -23,7 +23,8 @@
       name: docker-py
 
   - name: Creating workspace
-      path: /root/dockertask
+    file:
+      path: "/root/dockertask"
       state: directory
 
   - name: Copying files to workspace
@@ -34,7 +35,7 @@
 
 
   - name: Starting Docker service
-    package:
+    service:
       name: docker
       state: started
 
@@ -48,8 +49,9 @@
       name: webserver
       image: httpd
       state: started
-      detatch: true
+      detach: true
+      interactive: true
       ports:
-      - 6379
+      - "1111:80"
       volumes:
       - /root/dockertask/:/usr/local/apache2/htdocs/
