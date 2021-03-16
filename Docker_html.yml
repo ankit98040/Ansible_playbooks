@@ -42,3 +42,14 @@
     docker_image:
       name: httpd
       source: pull
+
+  - name: Docker Container
+    docker_container:
+      name: webserver
+      image: httpd
+      state: started
+      detatch: true
+      ports:
+      - 6379
+      volumes:
+      - /root/dockertask/:/usr/local/apache2/htdocs/
