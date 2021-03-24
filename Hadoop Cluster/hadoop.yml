@@ -1,8 +1,26 @@
-- hosts: namenode, datanode
+- hosts: namenode
+  vars_files: 
+  - variables 
+
   tasks:
 
-- hosts: namenode
-  tasks:
+  - name: Uploading jdk software
+    copy:
+      src: "{{ jdkfile }}"
+      dest: "/root/"
+
+  - name: Uploading Hadoop file
+    copy: 
+      src: "{{ hadoopfile }}"
+      dest: "/root/"
+
+  - name: Installing jdk
+    package:
+      name: "jdksoftware"
+      state: present
+      disable_gpg_check: yes
+    register: 
+
 
 - hosts: datanode
   tasks:
