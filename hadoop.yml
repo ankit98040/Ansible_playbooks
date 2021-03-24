@@ -1,0 +1,8 @@
+- hosts: namenode, datanode
+  tasks:
+
+- hosts: namenode
+  tasks:
+
+- hosts: datanode
+  tasks:
