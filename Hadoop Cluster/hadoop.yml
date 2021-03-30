@@ -16,10 +16,22 @@
 
   - name: Installing jdk
     package:
-      name: "jdksoftware"
+      name: "{{ jdkinstall }}"
       state: present
       disable_gpg_check: yes
-    register: 
+    register: jdkinstall
+
+  - name: Installing Hadoop
+    command: "rpm -ivh {{ hadoopinstall }} --force"
+    when: jdk_state.rc == 0
+
+  - name: Creating namenode directory
+    file:
+      path: "{{ namenode_directory }}"
+      state: directory
+
+  - name: 
+
 
 
 - hosts: datanode
