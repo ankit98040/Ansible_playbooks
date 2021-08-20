@@ -7,7 +7,7 @@
   - name: "copying the content to index.html file"
     copy: 
      dest: "/var/www/html/index.html"
-     content: "I LOVE YOU"
+     content: "I LOVE BASKETBALL"
 
   - replace:
      path: "/etc/httpd/conf/httpd.conf"
