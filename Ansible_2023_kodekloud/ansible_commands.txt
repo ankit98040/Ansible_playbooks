@@ -1,0 +1,1 @@
+ping text => ansible target1 -m ping -i inventory.txt
