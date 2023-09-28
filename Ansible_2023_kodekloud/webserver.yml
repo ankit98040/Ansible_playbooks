@@ -1,0 +1,6 @@
+hosts: web_server 
+tasks:
+  - name: copy index.html to remote server
+    copy:
+      src: index.html
+      dest: /var/www/nginx-default/index.html
