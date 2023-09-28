@@ -1,1 +1,5 @@
 ping text => ansible target1 -m ping -i inventory.txt
+
+ansible configuration file - /etc/ansible/ansible.cfg
+
+inventory - /etc/ansible/hosts
