@@ -1,0 +1,16 @@
+all:
+  children:
+    webservers:
+      children:
+        webserver_us:
+          hosts:
+            server1_us.com:
+              ansible_host: 192.168.5.1
+            server2_us.com:
+              ansible_host: 192.168.5.2
+        webserver_eu:
+          hosts:
+            server1eus.com:
+              ansible_host: 192.168.5.3
+            server2_eu.com:
+              ansible_host: 192.168.5.4
