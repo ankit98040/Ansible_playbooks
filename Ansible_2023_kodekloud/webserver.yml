@@ -1,6 +1,11 @@
 hosts: web_server 
 tasks:
-  - name: copy index.html to remote server
+  - name: copy index.html to remote server using copy module
     copy:
       src: index.html
+      dest: /var/www/nginx-default/index.html
+
+  - name: copy index.html to remote server using template module
+    template:
+      src: index.html.j2
       dest: /var/www/nginx-default/index.html
